@@ -4,20 +4,20 @@ import { Pessoa } from './shared/pessoa';
 
 @Controller('/api/pessoas')
 export class PessoasController {
-    constructor(private pessoa: PessoaService){}
+    constructor(private pessoaSerivce: PessoaService){}
 
     @Get()
     async getAll(): Promise<Pessoa[]>{
-        return this.pessoa.getAll()
+        return this.pessoaSerivce.getAll()
     }
 
     @Post()
     async store(@Body() bodyPessoa): Promise<Pessoa>{
-        return this.pessoa.create(bodyPessoa)
+        return this.pessoaSerivce.create(bodyPessoa)
     }
 
     @Post("/login")
     async getOneLogin(@Body("login") login){
-        return this.pessoa.getByLogin(login)
+        return this.pessoaSerivce.getByLogin(login)
     }
 }
