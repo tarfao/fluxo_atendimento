@@ -7,6 +7,7 @@ export const config: TypeOrmModuleOptions = {
     username: 'postgres',
     password: 'admin',
     database: 'fluxo_atendimento',
+    //caso nao fizesse esse match, eu deveria declarar todas as entidades criadas!
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: true,
 }
