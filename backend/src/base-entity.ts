@@ -1,5 +1,8 @@
 import { PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 
+/**Entidade base para as demais.
+ * Aqui encontramos os campos que sao comuns em todas as tabelas
+ */
 export class BaseEntity {
     //autoincrement
     @PrimaryGeneratedColumn()
