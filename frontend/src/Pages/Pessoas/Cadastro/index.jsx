@@ -1,23 +1,59 @@
 import { Form, Button } from "react-bootstrap";
+import MyInput from "./MyInput";
+import UseCadastro from "./UseCadastro";
+import { PError } from "./styles";
 
 function Cadastro(){
+    const { values, errors, handleChange, store } = UseCadastro();
+
     return (
-        <Form>
-            <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text>
+        <Form onSubmit={store}>
+            <MyInput 
+            placeholder="Informe seu login"
+            type='text'
+            errors={errors}
+            name='login'
+            values={values}
+            onchange={handleChange}
+            />
+            <MyInput
+                type="password" 
+                placeholder="Digite sua senha" 
+                name='senha'
+                values={values}
+                onchange={handleChange}
+                errors={errors}
+            />
+            <Form.Group>
+                <Form.Label>Tipo</Form.Label>
+                <Form.Control
+                    as='select' 
+                    name='tipo'
+                    value={values.tipo}
+                    onChange={handleChange}
+                    defaultValue='CLIENTE'
+                >
+                    <option/>
+                    <option value="CLIENTE">CLIENTE</option>
+                    <option value="ATENDENTE">ATENDENTE</option>
+                </Form.Control>
+                {errors.tipo ? <PError>{errors.tipo}</PError> : false}
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
+            {
+            values.tipo === 'ATENDENTE' ? 
+            (
+                <MyInput
+                    placeholder='Qual será a comissão?'
+                    type='number' 
+                    name='comissao'
+                    values={values}
+                    onchange={handleChange}
+                    errors={errors}
+                />
+            ) :
+            false
+            }
             <Button variant="primary" type="submit">
                 Submit
             </Button>
