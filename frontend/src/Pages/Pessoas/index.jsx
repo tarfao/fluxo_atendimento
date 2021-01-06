@@ -1,11 +1,15 @@
 import { Button } from "react-bootstrap";
 import Cadastro from "./Cadastro";
-import { WrapperContainer } from "./styles";
+import { WrapperContainer, WrapperContent } from "./styles";
+import Lista from "./Lista";
 
 export default () => (
-    <div>
+    <WrapperContent>
         <WrapperContainer>
             <Cadastro />
         </WrapperContainer>
-    </div>
+        <WrapperContainer>
+            <Lista />
+        </WrapperContainer>
+    </WrapperContent>
 )
