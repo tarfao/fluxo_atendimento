@@ -16,8 +16,8 @@ export class PessoasController {
         return this.pessoaSerivce.create(bodyPessoa)
     }
 
-    @Post("/login")
-    async getOneLogin(@Body() bodyLogin): Promise<Pessoa | { msg: string; }>{
-        return this.pessoaSerivce.login(bodyLogin)
+    @Get("/:username")
+    async getOneLogin(@Param("username") username): Promise<Pessoa | { msg: string; }>{
+        return this.pessoaSerivce.findByUsername(username)
     }
 }
