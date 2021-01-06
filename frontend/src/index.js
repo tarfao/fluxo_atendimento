@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Routes from './Pages/routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Pessoas from './Pages/Pessoas';
 
 ReactDOM.render(
-  <Pessoas />,
+  <Routes />,
   document.getElementById('root')
 );
