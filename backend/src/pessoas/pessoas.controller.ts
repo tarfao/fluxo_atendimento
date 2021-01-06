@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { PessoaService } from './shared/pessoa.service';
-import { Pessoa } from './shared/pessoa';
+import { Pessoa } from './pessoa.entity';
 
 @Controller('/api/pessoas')
 export class PessoasController {
@@ -17,7 +17,7 @@ export class PessoasController {
     }
 
     @Post("/login")
-    async getOneLogin(@Body("login") login){
-        return this.pessoaSerivce.getByLogin(login)
+    async getOneLogin(@Body() bodyLogin): Promise<Pessoa | { msg: string; }>{
+        return this.pessoaSerivce.login(bodyLogin)
     }
 }
