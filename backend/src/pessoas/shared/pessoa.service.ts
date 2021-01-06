@@ -20,7 +20,6 @@ export class PessoaService {
     }
 
     async findByUsername(username: string){
-        console.log(username)
         const pessoa = await this.pessoaRepository.findOne({ where: { login: username }});
         if(pessoa){
             return pessoa;
