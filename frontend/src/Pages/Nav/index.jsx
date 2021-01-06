@@ -1,6 +1,7 @@
 import { Nav } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { WrapperContent } from '../styles';
 
 const MyNav = styled.nav`
     display: flex;
@@ -15,13 +16,23 @@ MyNav.Item = styled(Link)`
     }
 `
 
-function Navegacao(){
+const WrapperContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+function Navegacao(props){
 return (
-    <MyNav>
-        <MyNav.Item to='/'>Lista</MyNav.Item>
-        <MyNav.Item to='/cadastro'>Cadastrar</MyNav.Item>
-        <MyNav.Item to='/busca'>Buscar</MyNav.Item>
-    </MyNav>
+    <div>
+        <MyNav>
+            <MyNav.Item to='/'>Lista</MyNav.Item>
+            <MyNav.Item to='/cadastro'>Cadastrar</MyNav.Item>
+            <MyNav.Item to='/busca'>Buscar</MyNav.Item>
+        </MyNav>
+        <WrapperContainer>
+            {props.children}
+        </WrapperContainer>
+    </div>
 )
 }
 
