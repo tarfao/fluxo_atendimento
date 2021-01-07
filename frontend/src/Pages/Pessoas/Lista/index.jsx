@@ -23,7 +23,7 @@ function Lista(){
 
     useEffect(() => {
         indexPessoas();
-    })
+    }, [])
     return (
         <Table striped bordered hover>
             <thead>
