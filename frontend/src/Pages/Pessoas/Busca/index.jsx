@@ -1,13 +1,9 @@
 import { Form, Table, Button } from "react-bootstrap";
 import { useState } from "react";
+import axios from "axios";
+import consts from "../../../config/consts";
 
 function Busca(){
-    const Pessoas = [
-        { id: 1, login: "Ronaldo", tipo: "CLIENTE" },
-        { id: 2, login: "tafarel", tipo: "ATENDENTE" },
-        { id: 3, login: "pereira", tipo: "CLIENTE" },
-        { id: 4, login: "souza", tipo: "ATENDENTE" },
-    ]
     const [inputBusca, setInputBusca] = useState("")
     const [pessoaEncontrada, setPessoaEncontrada] = useState({});
 
@@ -16,10 +12,10 @@ function Busca(){
         setInputBusca(value);
     }
     
-    const buscaPessoa = e => {
-        const p = Pessoas.find(o => o.login === inputBusca);
-        if(p){
-            setPessoaEncontrada(p);
+    const buscaPessoa = async () => {
+        const { data } = await axios.get(`${consts.api}/pessoas/${inputBusca}`)
+        if(data){
+            setPessoaEncontrada(data);
             return;
         }
         setPessoaEncontrada({});
