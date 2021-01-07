@@ -2,8 +2,11 @@ import { Form, Table, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import consts from "../../../config/consts";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { updateValue } from '../../../Componentes/MyToastr/toastrAction';
 
-function Busca(){
+function Busca({ updateValue }){
     const [inputBusca, setInputBusca] = useState("")
     const [pessoaEncontrada, setPessoaEncontrada] = useState({});
 
@@ -13,12 +16,16 @@ function Busca(){
     }
     
     const buscaPessoa = async () => {
-        const { data } = await axios.get(`${consts.api}/pessoas/${inputBusca}`)
-        if(data){
-            setPessoaEncontrada(data);
-            return;
+        if(inputBusca !== ''){
+            const { data } = await axios.get(`${consts.api}/pessoas/${inputBusca}`)
+            if(data.id){
+                setPessoaEncontrada(data);
+                updateValue({ show: true, titulo: 'Sucesso', mensagem: 'Pessoa encontrada!', cor: '#32CD32' });
+                return;
+            }
+            updateValue({ show: true, titulo: 'Ops', mensagem: 'Pessoa não encontrada!', cor: '#FF8C00' });
+            setPessoaEncontrada({});
         }
-        setPessoaEncontrada({});
     }
 
     return (
@@ -50,4 +57,5 @@ function Busca(){
     )
 }
 
-export default Busca;
+const mapDispatchToProps = dispatch => bindActionCreators({ updateValue }, dispatch)
+export default connect(null, mapDispatchToProps)(Busca);
