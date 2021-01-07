@@ -2,9 +2,12 @@ import { Form, Button } from "react-bootstrap";
 import MyInput from "./MyInput";
 import UseCadastro from "./UseCadastro";
 import { PError } from "./styles";
+import { bindActionCreators } from "redux";
+import { connect } from 'react-redux';
+import { updateValue } from '../../../Componentes/MyToastr/toastrAction';
 
-function Cadastro(){
-    const { values, errors, handleChange, store } = UseCadastro();
+function Cadastro(props){
+    const { values, errors, handleChange, store } = UseCadastro(props.updateValue);
 
     return (
         <Form onSubmit={store}>
@@ -61,4 +64,5 @@ function Cadastro(){
     )
 }
 
-export default Cadastro;
+const mapDispatchToProps = dispatch => bindActionCreators({ updateValue }, dispatch);
+export default connect(null, mapDispatchToProps)(Cadastro);

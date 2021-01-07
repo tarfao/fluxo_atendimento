@@ -3,7 +3,7 @@ import axios from "axios";
 import consts from "../../../../config/consts";
 import { useHistory } from 'react-router-dom';
 
-function UseCadastro() {
+function UseCadastro(updateValue) {
     const dados_iniciais = {
         login: '',
         senha: '',
@@ -51,6 +51,7 @@ function UseCadastro() {
         const dados_validos = await valida_dados();
         if(dados_validos){
             await axios.post(`${consts.api}/pessoas`, values)
+            updateValue({ show: true, mensagem: 'Pessoa cadastrada!', titulo: 'Sucesso', cor: '#32CD32' })
             history.push("/");
         }
     }
