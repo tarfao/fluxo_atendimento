@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from "axios";
+import consts from "../../../../config/consts";
+import { useHistory } from 'react-router-dom';
 
 function UseCadastro() {
     const dados_iniciais = {
@@ -10,6 +13,7 @@ function UseCadastro() {
 
     const [values, setValues] = useState(dados_iniciais);
     const [errors, setErrors] = useState({ ...dados_iniciais, comissao: ''});
+    const history = useHistory();
 
     const handleChange = e => {
         const name = e.target.getAttribute("name");
@@ -46,9 +50,8 @@ function UseCadastro() {
         e.preventDefault();
         const dados_validos = await valida_dados();
         if(dados_validos){
-            console.log("submetido");
-        }else{
-            console.log("Erro na submissão");
+            await axios.post(`${consts.api}/pessoas`, values)
+            history.push("/");
         }
     }
 
